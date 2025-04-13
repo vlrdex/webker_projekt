@@ -1,0 +1,15 @@
+<li class="cart-item">
+  <div class="item-details">
+    <h3>{{ item.product.name }}</h3>
+    <p>Ár: {{ item.product.price }} Ft</p>
+  </div>
+  <div class="quantity-controls">
+    <button mat-icon-button style="color: black" [ngStyle]="{'background-color': item.product.quantity<=1 ? 'red': '#FFA500'}" (click)="onChangeQuantityM()" [disabled]="item.product.quantity <= 1">-</button>
+    <span>{{ item.product.quantity }}</span>
+    <button mat-icon-button style="background-color: #FFA500; color: black" (click)="onChangeQuantityP()">+</button>
+  </div>
+  <div class="item-total">
+    {{ (item.product.price * item.product.quantity) | numberShort }} Ft
+  </div>
+  <button (click)="onRemoveItem()" class="remove-button">Eltávolítás</button>
+</li>

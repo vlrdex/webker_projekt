@@ -1,0 +1,24 @@
+h1 {
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.cart-items {
+  list-style: none;
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+
+.cart-summary {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 15px;
+  border-top: 2px solid #ccc;
+
+  .total-price {
+    font-size: 1.2em;
+    font-weight: bold;
+  }
+}
