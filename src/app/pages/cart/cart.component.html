@@ -1,14 +1,14 @@
 <h1>Kosár</h1>
 
 @if(cartItems.length==0){
-  <div>
+  <mat-card class="ures">
     <p>A kosarad jelenleg üres.</p>
-    <a routerLink="/home">Nézz szét a termékek között!</a>
-  </div>
+    <button mat-flat-button class="gomb" style="background-color: #FFA500; color: black" routerLink="/home">Nézz szét a termékek között!</button>
+  </mat-card>
 } @else {
   <ul class="cart-items">
     @for (item of cartItems; track item){
-      <app-cart-item [item]="changeTo(item)"  (changeQuantityM)="changeQuantity($event,$event.quantity-1)" (changeQuantityP)="changeQuantity($event,$event.quantity+1)" (removeItem)="removeItem($event)"></app-cart-item>
+      <app-cart-item [item]="item"  (changeQuantityM)="changeQuantity($event,$event.quantity-1)" (changeQuantityP)="changeQuantity($event,$event.quantity+1)" (removeItem)="removeItem($event)"></app-cart-item>
     }
   </ul>
 

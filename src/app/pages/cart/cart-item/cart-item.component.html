@@ -1,15 +1,33 @@
 <li class="cart-item">
   <div class="item-details">
     <h3>{{ item.product.name }}</h3>
-    <p>Ár: {{ item.product.price }} Ft</p>
+    <p class="item-price">Ár: {{ item.product.price}}</p>
+    <p class="item-description" *ngIf="!item.hosszu">{{ item.product.description | short }} <button mat-icon-button (click)="item.hosszu = true"><mat-icon>more_horiz</mat-icon></button></p>
+    <p class="item-description" *ngIf="item.hosszu">{{ item.product.description }} <button mat-icon-button (click)="item.hosszu = false"><mat-icon>expand_less</mat-icon></button></p>
   </div>
   <div class="quantity-controls">
-    <button mat-icon-button style="color: black" [ngStyle]="{'background-color': item.product.quantity<=1 ? 'red': '#FFA500'}" (click)="onChangeQuantityM()" [disabled]="item.product.quantity <= 1">-</button>
-    <span>{{ item.product.quantity }}</span>
-    <button mat-icon-button style="background-color: #FFA500; color: black" (click)="onChangeQuantityP()">+</button>
+    <button
+      mat-icon-button
+      style="color: black"
+      [ngStyle]="{'background-color': item.product.quantity <= 1 ? 'red': '#FFA500'}"
+      (click)="onChangeQuantityM()"
+      [disabled]="item.product.quantity <= 1"
+      aria-label="Mennyiség csökkentése">
+      <mat-icon>remove</mat-icon>
+    </button>
+    <span class="item-quantity">{{ item.product.quantity }}</span>
+    <button
+      mat-icon-button
+      style="background-color: #FFA500; color: black"
+      (click)="onChangeQuantityP()"
+      aria-label="Mennyiség növelése">
+      <mat-icon>add</mat-icon>
+    </button>
   </div>
   <div class="item-total">
-    {{ (item.product.price * item.product.quantity) | numberShort }} Ft
+    {{ (item.product.price * item.product.quantity)}}
   </div>
-  <button (click)="onRemoveItem()" class="remove-button">Eltávolítás</button>
+  <button mat-flat-button color="warn" style="background-color: red;" (click)="onRemoveItem()" aria-label="Termék eltávolítása">
+    <mat-icon>delete</mat-icon> Eltávolítás
+  </button>
 </li>

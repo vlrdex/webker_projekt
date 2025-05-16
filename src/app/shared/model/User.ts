@@ -1,5 +1,5 @@
 export interface User{
-  email : String;
-  password : String;
-  name:String;
+  email : string;
+  name:string;
+  admin:Boolean;
 }

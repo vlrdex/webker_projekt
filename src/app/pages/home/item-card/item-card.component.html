@@ -1,4 +1,4 @@
-<mat-card class="flex-item" [ngStyle]="{'color': item.quantity==0 ? 'grey' : ''}">
+<mat-card class="flex-item" [ngClass]="{'out' : item.quantity<=0}">
   <mat-card-header style="text-align: center; margin-bottom: 15px;">
     <mat-card-title>{{item.name}}</mat-card-title>
   </mat-card-header>
@@ -10,7 +10,7 @@
   <mat-card-footer>
     <mat-card-actions>
       @if (item.quantity==0){
-        <button mat-flat-button style="background-color: red; color: black; margin:auto" >Elfogyot</button>
+        <button mat-flat-button style="background-color: red; color: black; margin:auto" disabled >Elfogyot</button>
       }@else{
         <button mat-flat-button style="background-color: #FFA500; color: black; margin: auto" (click)="onAddToCart()">Add to Cart</button>
       }

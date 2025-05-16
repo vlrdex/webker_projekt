@@ -2,15 +2,22 @@ import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {CartItem} from '../../../shared/model/cart';
 import {Product_item} from '../../../shared/model/product_item';
 import {NumberShortPipe} from '../../../shared/pipes/number-short.pipe';
-import {MatIconButton} from '@angular/material/button';
-import {NgStyle} from '@angular/common';
+import {MatButton, MatIconButton} from '@angular/material/button';
+import {NgStyle, NgClass, NgIf} from '@angular/common';
+import {ShortPipe} from '../../../shared/pipes/short.pipe';
+import {MatIcon} from '@angular/material/icon';
 
 @Component({
   selector: 'app-cart-item',
   imports: [
     NumberShortPipe,
     MatIconButton,
-    NgStyle
+    NgStyle,
+    NgClass,
+    MatIcon,
+    ShortPipe,
+    MatButton,
+    NgIf
   ],
   templateUrl: './cart-item.component.html',
   standalone: true,

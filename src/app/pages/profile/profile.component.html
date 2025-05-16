@@ -1,22 +1,37 @@
-<div>
-  <div>
-    <h1 class="text-2xl font-semibold mt-4">John Doe</h1>
-    <p class="text-gray-400">aaaaaaaaaaaaaaaaaaaaaaaaaaaaa</p>
+<div class="profile-container">
+  <mat-card class="profile-info">
+    <mat-card-title>Profilom</mat-card-title>
+    <mat-card-content>
+      <div class="data-item">
+        <mat-label>Email:</mat-label>
+        <span>{{ user.email }}</span>
+      </div>
+      <div class="data-item">
+        <mat-label>Név:</mat-label>
+        <span>{{ user.name }}</span>
+      </div>
+    </mat-card-content>
+  </mat-card>
 
-    <div class="flex justify-center gap-4 mt-4">
-      <a href="#" class="text-orange-400 hover:text-orange-500 transition text-lg">
-        <i class="fab fa-github"></i>
-      </a>
-      <a href="#" class="text-orange-400 hover:text-orange-500 transition text-lg">
-        <i class="fab fa-linkedin"></i>
-      </a>
-      <a href="#" class="text-orange-400 hover:text-orange-500 transition text-lg">
-        <i class="fab fa-twitter"></i>
-      </a>
-    </div>
-
-    <button class="mt-6 bg-orange-500 hover:bg-orange-600 text-white py-2 px-4 rounded-lg transition">
-      Contact Me
-    </button>
-  </div>
+  <mat-card class="order-history">
+    <mat-card-title>Korábbi Megrendeléseim</mat-card-title>
+    <mat-card-content>
+      <ul *ngIf="orders && orders.length > 0; else noOrders">
+        @for (order of orders; track order.date) {
+          <li>
+            <div>
+              <strong>Dátum:</strong> {{ order.date }}
+            </div>
+            <div>
+              <strong>Összeg:</strong> {{ order.total }} Ft
+            </div>
+            <button mat-raised-button color="primary">Megtekintés</button>
+          </li>
+        }
+      </ul>
+      <ng-template #noOrders>
+        <p>Nincsenek korábbi megrendeléseid.</p>
+      </ng-template>
+    </mat-card-content>
+  </mat-card>
 </div>

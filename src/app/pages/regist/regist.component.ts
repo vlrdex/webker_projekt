@@ -8,6 +8,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import {User} from '../../shared/model/User';
+import {UserService} from '../../shared/services/user.service';
 
 @Component({
   selector: 'app-regist',
@@ -36,8 +37,10 @@ export class RegistComponent implements OnInit{
     rePassword: new FormControl<string>("", [Validators.required, Validators.minLength(6)]),
   });
 
-  ngOnInit(): void {
+  constructor(private userService:UserService) {
+  }
 
+  ngOnInit(): void {
     this.registForm.get('password')?.valueChanges.subscribe(value => {
       if (value !== null) {
         this.checkPasswordStrength(value);
@@ -56,15 +59,26 @@ export class RegistComponent implements OnInit{
       if(this.registForm.value.password != this.registForm.value.rePassword){
         this.error="Nem egyezik a jelszó és ellenőrző jelszó";
         return;
+      }else{
+        var user : User={
+          email: this.registForm.value.email==null ? "" : this.registForm.value.email,
+          name: this.registForm.value.name==null ? "" :  this.registForm.value.name,
+          admin:false
+        }
+
+        try {
+          this.userService.register(user,this.registForm.value.password? this.registForm.value.password:"");
+        }catch (e){
+          this.error="Sikertelen regisztráció"
+        }
+
+
       }
 
-      const user: User={
-        email : this.registForm.value.email || "",
-        password :this.registForm.value.password || "",
-        name:this.registForm.value.name || ""
-      }
 
-      console.log(user);
+
+
+
     }
   }
 

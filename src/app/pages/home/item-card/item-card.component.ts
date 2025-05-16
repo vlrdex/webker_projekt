@@ -9,7 +9,7 @@ import {
   MatCardSubtitle,
   MatCardTitle
 } from '@angular/material/card';
-import {NgStyle} from '@angular/common';
+import {NgClass, NgStyle} from '@angular/common';
 
 @Component({
   selector: 'app-item-card',
@@ -24,7 +24,8 @@ import {NgStyle} from '@angular/common';
     MatCardActions,
     MatCardHeader,
     MatCardFooter,
-    NgStyle
+    NgStyle,
+    NgClass
   ],
   templateUrl: './item-card.component.html',
   standalone: true,
