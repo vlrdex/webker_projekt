@@ -1,10 +1,10 @@
 import {User} from './User';
 import {Product_item} from './product_item';
-import {Timestamp} from 'rxjs';
+import { Timestamp } from '@angular/fire/firestore'
 
 export interface Order{
-  user: User
-  products:String[];
-  date:any;
+  user: String
+  products:Product_item[];
+  date:Timestamp;
   total:number;
 }

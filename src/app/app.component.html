@@ -14,12 +14,20 @@
       <div>Szönyeg shop</div>
       <nav>
         <ul>
+          @if (userService.isAdmin() && !isActive("/admin")){
+            <li><a routerLink="/admin">Admin felület</a></li>
+          }
+          @if (userService.isAdmin() && isActive("/admin")){
+            <li><a routerLink="/admin/create">Új termék hozáadása</a></li>
+          }
           <li><a routerLink="/home"><mat-icon>house</mat-icon></a></li>
           <li><a routerLink="/cart"><mat-icon>shopping_cart</mat-icon></a></li>
-          <li><a routerLink="/profile"><mat-icon matListItemIcon>person</mat-icon></a></li>
-          <li><a routerLink="/login"><mat-icon>login</mat-icon></a></li>
-          <!--<li><a href="#" (click)="$event.preventDefault(); logout()">Logout</a></li> !-->
-
+          @if(userService.currentUser | async; as user){
+            <li><a routerLink="/profile"><mat-icon matListItemIcon>person</mat-icon></a></li>
+            <li><a href="#" (click)="logout()"><mat-icon>logout</mat-icon></a></li>
+          }@else {
+            <li><a routerLink="/login"><mat-icon>login</mat-icon></a></li>
+          }
         </ul>
       </nav>
     </mat-toolbar>

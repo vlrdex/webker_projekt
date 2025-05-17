@@ -1,4 +1,5 @@
 import { Routes } from '@angular/router';
+import {adminGuard, authGuard, publicGuard} from './shared/auth/authguard.guard';
 
 export const routes: Routes = [
   {
@@ -11,15 +12,28 @@ export const routes: Routes = [
   },
   {
     path: 'profile',
-    loadComponent: () => import('./pages/profile/profile.component').then(m => m.ProfileComponent)
+    loadComponent: () => import('./pages/profile/profile.component').then(m => m.ProfileComponent),
+    canActivate: [authGuard]
   },
   {
     path: 'login',
-    loadComponent: () => import('./pages/login/login.component').then(m => m.LoginComponent)
+    loadComponent: () => import('./pages/login/login.component').then(m => m.LoginComponent),
+    canActivate: [publicGuard]
   },
   {
     path: 'regist',
-    loadComponent: () => import('./pages/regist/regist.component').then(m => m.RegistComponent)
+    loadComponent: () => import('./pages/regist/regist.component').then(m => m.RegistComponent),
+    canActivate: [publicGuard]
+  },
+  {
+    path: 'admin',
+    loadComponent: () => import('./pages/admin/admin.component').then(m => m.AdminComponent),
+    canActivate: [adminGuard]
+  },
+  {
+    path: 'admin/create',
+    loadComponent: () => import('./pages/admin/admin-upload/admin-upload.component').then(m => m.AdminUploadComponent),
+    canActivate: [adminGuard]
   },
   {
     path: '',

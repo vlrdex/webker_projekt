@@ -76,9 +76,6 @@ export class RegistComponent implements OnInit{
       }
 
 
-
-
-
     }
   }
 
@@ -105,7 +102,5 @@ export class RegistComponent implements OnInit{
       this.passwordStrength = 'Erős';
     }
   }
-
-
 
 }

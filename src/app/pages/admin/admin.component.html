@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Terméklista</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+<body>
+<div class="container">
+  <h1>Terméklista</h1>
+  <ul class="product-list">
+    @for (item of products | async; track item.id){
+      <app-admin-item [item]="item" (updateOutput)="update($event)" (deleteEmit)="onDelete($event)"></app-admin-item>
+    }
+  </ul>
+</div>
+
+</body>
+</html>

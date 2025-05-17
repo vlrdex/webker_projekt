@@ -12,11 +12,16 @@
     }
   </ul>
 
-
   <div class="cart-summary">
     <p class="total-price">Összesen: {{totalPrice | numberShort }} Ft</p>
-    <button mat-flat-button style="background-color: red; color: black;">Kosár kiürítése</button>
-    <button mat-flat-button (click)="orderCart()" style="background-color: #FFA500; color: black;">Megrendel</button>
+    <button mat-flat-button style="background-color: red; color: black;" (click)="clearCart()">Kosár kiürítése</button>
+    <button mat-flat-button (click)="orderCart()" [ngStyle]="{'background-color': (userService.isLogedIn()) ? '#FFA500' : 'red', 'color': (userService.isLogedIn()) ?  'black' : 'white'}">
+      @if (userService.isLogedIn()) {
+        Megrendelés
+      } @else {
+        Jelntkez be a megrendeléshez
+      }
+    </button>
   </div>
 }
 

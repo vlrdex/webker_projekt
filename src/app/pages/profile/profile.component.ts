@@ -3,6 +3,8 @@ import {User} from '../../shared/model/User';
 import {Order} from '../../shared/model/order';
 import {MatCard,MatCardTitle,MatCardContent} from '@angular/material/card';
 import {MatLabel} from '@angular/material/form-field';
+import {Auth} from '@angular/fire/auth';
+import {UserService} from '../../shared/services/user.service';
 
 @Component({
   selector: 'app-profile',
@@ -19,4 +21,8 @@ import {MatLabel} from '@angular/material/form-field';
 export class ProfileComponent {
   user:User={name:"alma",email:"teszt",admin:false};
   orders:Order[]=[];
+
+  constructor(private auth:Auth,private userService : UserService){
+    this.user=userService.getUserFromLocalStorage();
+  }
 }

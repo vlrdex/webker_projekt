@@ -8,6 +8,12 @@ import {User} from '../../shared/model/User'
 import {Order} from '../../shared/model/order';
 import {MatButton} from '@angular/material/button';
 import {MatCard} from '@angular/material/card';
+import {UserService} from '../../shared/services/user.service';
+import {async, Observable} from 'rxjs';
+import {map, take} from 'rxjs/operators';
+import {AsyncPipe, NgStyle} from '@angular/common';
+import {Timestamp} from '@angular/fire/firestore';
+import {CartService} from '../../shared/services/cart-service.service';
 
 @Component({
   selector: 'app-cart',
@@ -17,6 +23,8 @@ import {MatCard} from '@angular/material/card';
     CartItemComponent,
     MatButton,
     MatCard,
+    NgStyle,
+    AsyncPipe,
   ],
   templateUrl: './cart.component.html',
   standalone: true,
@@ -26,7 +34,7 @@ export class CartComponent implements OnDestroy{
   cartItems:CartItem[]=[];
   totalPrice:number;
 
-  constructor() {
+  constructor(protected userService: UserService,private cartservice: CartService) {
     this.totalPrice=0;
     this.updateTotalPrice();
     var a=localStorage.getItem("cart");
@@ -42,6 +50,7 @@ export class CartComponent implements OnDestroy{
   ngOnDestroy() {
     localStorage.setItem("cart",JSON.stringify(this.cartItems))
   }
+
 
 
   changeQuantity(item: Product_item, quantity: number): void {
@@ -68,17 +77,24 @@ export class CartComponent implements OnDestroy{
   }
 
 
-  changeTo(item:Product_item):CartItem{
-    return {
-      product:item,
-      hosszu:false
+
+  orderCart(){
+    if(this.userService.isLogedIn()){
+      var order : Order = {
+        user:this.userService.userId(),
+        products:this.cartItems.map(e => e.product),
+        date:Timestamp.now(),
+        total:this.totalPrice
+      }
+      this.cartservice.saveOrder(order)
+      localStorage.removeItem("cart")
+      this.cartItems=[];
     }
   }
 
-
-  orderCart(){
-    console.log(this.cartItems);
+  clearCart(){
     localStorage.removeItem("cart")
+    this.cartItems=[];
   }
 
 

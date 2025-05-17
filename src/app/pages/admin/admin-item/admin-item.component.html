@@ -1,0 +1,60 @@
+<li class="product-item">
+  <div class="product-details">
+    <div class="product-name">{{ item.name }}</div>
+    <div class="product-price">Ár: {{ item.price }} Ft</div>
+    <div class="product-quantity">
+      Készlet: <span [ngClass]="item.quantity > 0 ? 'quantity-available' : 'quantity-sold-out'">
+                            {{ item.quantity > 0 ? 'Van raktáron' : 'Elfogyott' }}
+                        </span>
+    </div>
+    <div>
+      <p>Azonosito: {{item.id}}</p>
+    </div>
+  </div>
+  <div class="actions">
+    <button mat-raised-button class="edit-button" (click)="csere()" >
+      <mat-icon>edit</mat-icon>
+      Módosít
+    </button>
+    <button mat-raised-button class="delete-button" (click)="onDelete()">
+      <mat-icon>delete</mat-icon>
+      Törlés
+    </button>
+  </div>
+</li>
+@if (!rejtett){
+<div class="modosit">
+  <h1>Termék űrlap</h1>
+  <form [formGroup]="productForm" class="form" (ngSubmit)="onSubmit()">
+
+    <mat-form-field appearance="fill">
+      <mat-label>Név:</mat-label>
+      <input matInput type="text" id="name"  formControlName="name">
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Ár:</mat-label>
+      <input matInput type="number" id="price" formControlName="price">
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Kép URL:</mat-label>
+      <input matInput type="text" id="image"  formControlName="image">
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Leírás:</mat-label>
+      <textarea matInput id="description" formControlName="description"></textarea>
+    </mat-form-field>
+
+    <div class="box">
+      <mat-label style="font-size: xx-large">Van raktáron:</mat-label>
+      <mat-checkbox style="fill: white" formControlName="inStock"></mat-checkbox>
+    </div>
+
+
+    <button mat-flat-button style="background-color: #FFA500;color: white" type="submit" class="btn btn-primary">Mentés</button>
+  </form>
+</div>
+}
+

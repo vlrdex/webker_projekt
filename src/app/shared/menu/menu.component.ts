@@ -4,6 +4,7 @@ import { MatListModule } from '@angular/material/list'
 import { MatIconModule } from '@angular/material/icon';
 import { MatSidenav } from '@angular/material/sidenav';
 import { CommonModule } from '@angular/common';
+import {UserService} from '../services/user.service';
 
 @Component({
   selector: 'app-menu',
@@ -21,10 +22,18 @@ import { CommonModule } from '@angular/common';
 export class MenuComponent {
   @Input() sidenav!: MatSidenav;
 
+  constructor(protected userService: UserService) {
+  }
+
+
   closeMenu() {
     if (this.sidenav) {
       this.sidenav.close();
     }
+  }
+
+  logout(){
+    this.userService.signOut();
   }
 
 }

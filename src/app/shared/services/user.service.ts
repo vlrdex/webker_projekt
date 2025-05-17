@@ -11,6 +11,7 @@ import { Router } from '@angular/router';
 import { Observable, from, switchMap, of } from 'rxjs';
 import {User} from '../model/User';
 import {DocumentData, DocumentReference} from '@angular/fire/compat/firestore';
+import {map, take} from 'rxjs/operators';
 
 
 @Injectable({
@@ -29,7 +30,6 @@ export class UserService {
       const firebaseUser = userCredential.user;
 
       if (firebaseUser) {
-        // Sikeres bejelentkezés, most lekérjük a felhasználói adatokat a Firestore-ból
         const userDocRef = doc(this.firestore, 'Users', firebaseUser.uid);
         const userDocSnap = await getDoc(userDocRef);
 
@@ -73,7 +73,7 @@ export class UserService {
     });
   }
 
-  getUserFromLocalStorage(): User | null {
+  public getUserFromLocalStorage(): User {
     const storedUser = localStorage.getItem('user');
     if (storedUser) {
       try {
@@ -81,10 +81,22 @@ export class UserService {
       } catch (error) {
         console.error('Hiba a felhasználói adatok feldolgozása során a localStorage-ból:', error);
         localStorage.removeItem('user'); // Ha hiba van, töröljük a hibás adatot
-        return null;
+        return {name:"ismeretlen",email:"ismeretlen",admin:false};
       }
     }
-    return null;
+    return {name:"ismeretlen",email:"ismeretlen",admin:false};
+  }
+
+  isLogedIn():boolean{
+    return !(this.getUserFromLocalStorage().name==="ismeretlen");
+  }
+
+  userId() :string{
+    return this.auth.currentUser?.uid ? this.auth.currentUser.uid :""
+  }
+
+  isAdmin():boolean{
+    return this.getUserFromLocalStorage().admin;
   }
 
 

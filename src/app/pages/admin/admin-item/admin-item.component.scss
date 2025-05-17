@@ -1,0 +1,121 @@
+body {
+  font-family: 'Roboto', sans-serif;
+  margin: 0;
+  padding: 0;
+  color: white;
+}
+.container {
+  max-width: 960px;
+  margin: 20px auto;
+  padding: 20px;
+  background-color: #252525;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+h1 {
+  color: #FFA500;
+  text-align: center;
+  margin-bottom: 20px;
+}
+.product-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.product-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px;
+  border-bottom: 1px solid #ddd;
+}
+.product-item:last-child {
+  border-bottom: none;
+}
+.product-details {
+  flex: 1;
+  margin-right: 20px;
+}
+.product-name {
+  font-size: 1.2em;
+  font-weight: 500;
+  color: white;
+  margin-bottom: 5px;
+}
+.product-price {
+  font-size: 1.1em;
+  color: #e74c3c;
+  margin-bottom: 5px;
+}
+.product-quantity {
+  font-size: 1em;
+  color: white;
+  margin-bottom: 0;
+}
+.quantity-available {
+  color: #27ae60;
+}
+.quantity-sold-out {
+  color: #e74c3c;
+}
+.actions {
+  display: flex;
+  gap: 10px;
+}
+.edit-button,
+.delete-button {
+  background-color: #FFA500;
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.9em;
+  transition: background-color 0.3s ease;
+}
+.edit-button:hover {
+  background-color: #f5b041;
+}
+.delete-button {
+  background-color: #e74c3c;
+  color: white;
+}
+.delete-button:hover {
+  background-color: #c0392b;
+}
+.no-products {
+  text-align: center;
+  color: white;
+  font-size: 1.1em;
+  margin-top: 20px;
+}
+.loading-indicator {
+  text-align: center;
+  margin-top: 20px;
+  font-size: 1.2em;
+  color: #FFA500;
+}
+
+.mat-icon {
+  width: 16px;
+  height: 16px;
+  vertical-align: middle;
+}
+
+.form{
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.modosit{
+  background-color: #252525;
+  margin: 50px auto;
+  padding: 50px;
+  text-align: center;
+  max-width: 500px;
+}
+
+.box{
+  display: flex; flex-direction: row; gap: 25px;
+}
