@@ -80,6 +80,7 @@ export class CartComponent implements OnDestroy{
 
   orderCart(){
     if(this.userService.isLogedIn()){
+      this.updateTotalPrice();
       var order : Order = {
         user:this.userService.userId(),
         products:this.cartItems.map(e => e.product),

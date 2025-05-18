@@ -16,16 +16,24 @@
   <mat-card class="order-history">
     <mat-card-title>Korábbi Megrendeléseim</mat-card-title>
     <mat-card-content>
-      <ul *ngIf="orders && orders.length > 0; else noOrders">
-        @for (order of orders; track order.date) {
-          <li>
+      <mat-radio-group
+        aria-label="Select sort type"
+        [(ngModel)]="sortType"
+        (change)="onSortChange()"
+      >
+        <mat-radio-button value="date"><p style="color: white">Rendezés Dátum szerint</p></mat-radio-button>
+        <mat-radio-button value="total"><p  style="color: white">Rendezés Ár szerint</p></mat-radio-button>
+      </mat-radio-group>
+
+      <ul>
+        @for (order of orders | async; track order.date) {
+          <li style="background-color: #555555">
             <div>
-              <strong>Dátum:</strong> {{ order.date }}
+              Dátum: {{ order.date.toDate() }}
             </div>
             <div>
-              <strong>Összeg:</strong> {{ order.total }} Ft
+              Összeg: {{ order.total }}
             </div>
-            <button mat-raised-button color="primary">Megtekintés</button>
           </li>
         }
       </ul>
